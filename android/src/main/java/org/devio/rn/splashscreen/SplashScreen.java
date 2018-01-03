@@ -3,6 +3,8 @@ package org.devio.rn.splashscreen;
 import android.app.Activity;
 import android.app.Dialog;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -79,6 +81,7 @@ public class SplashScreen {
                     mSplashDialog.dismiss();
                     mSplashDialog = null;
                 }
+                EventBus.getDefault().post(new MessageEvent("hideSplashScreen"));
             }
         });
     }
