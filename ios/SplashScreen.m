@@ -10,6 +10,8 @@
 #import "SplashScreen.h"
 #import <React/RCTBridge.h>
 
+#define KSplashScreenHide @"hideSplashCreen"
+
 static bool waiting = true;
 static bool addedJsLoadErrorObserver = false;
 
@@ -35,6 +37,7 @@ RCT_EXPORT_MODULE()
     dispatch_async(dispatch_get_main_queue(),
                    ^{
                        waiting = false;
+                       [[NSNotificationCenter defaultCenter] postNotificationName:KSplashScreenHide object:nil];
                    });
 }
 
