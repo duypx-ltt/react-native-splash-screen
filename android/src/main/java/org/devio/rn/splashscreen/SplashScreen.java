@@ -85,4 +85,28 @@ public class SplashScreen {
             }
         });
     }
+
+    public static void hide(Activity activity, final boolean noPostEvent) {
+        if (activity == null) {
+            if (mActivity == null) {
+                return;
+            }
+            activity = mActivity.get();
+        }
+        if (activity == null) return;
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mSplashDialog != null && mSplashDialog.isShowing()) {
+                    mSplashDialog.dismiss();
+                    mSplashDialog = null;
+                }
+
+                if (!noPostEvent) {
+                    EventBus.getDefault().post(new MessageEvent("hideSplashScreen"));
+                }
+            }
+        });
+    }
 }
